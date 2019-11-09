@@ -1,7 +1,13 @@
 <div class="card card-body">
   <form>
     <div class="form-group">
-      <textarea type="text" class="form-control" placeholder="Add a note...">
+      <textarea
+        type="text"
+        name="text"
+        [(ngModel)]="text"
+        class="form-control"
+        placeholder="Add a note..."
+      >
       </textarea>
     </div>
     <input

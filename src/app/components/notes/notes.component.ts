@@ -13,6 +13,12 @@ export class NotesComponent implements OnInit {
   public constructor(private noteService: NoteService) {}
 
   public ngOnInit() {
-    this.notes = this.noteService.getNotes();
+    this.noteService.getNotes().subscribe(notes => {
+      this.notes = notes;
+    });
+  }
+
+  public onSelect(note: Note): void {
+    this.noteService.setFormNote(note);
   }
 }
