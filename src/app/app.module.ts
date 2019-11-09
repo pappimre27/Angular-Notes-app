@@ -6,6 +6,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NoteFormComponent } from './components/note-form/note-form.component';
 import { NotesComponent } from './components/notes/notes.component';
 
+import { NoteService } from './services/note.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -13,10 +15,8 @@ import { NotesComponent } from './components/notes/notes.component';
     NoteFormComponent,
     NotesComponent
   ],
-  imports: [
-    BrowserModule
-  ],
-  providers: [],
+  imports: [BrowserModule],
+  providers: [NoteService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
