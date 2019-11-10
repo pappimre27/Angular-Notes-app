@@ -1,5 +1,6 @@
-<ul class="list-group">
+<ul *ngIf="loaded && notes.length > 0" class="list-group">
   <li
+    [class.list-group-item-secondary]="selectedNote === note"
     *ngFor="let note of notes"
     class="list-group-item d-flex justify-content-between align-items-center"
   >
@@ -8,3 +9,6 @@
     <i class="fa fa-remove" (click)="onDelete(note)"></i>
   </li>
 </ul>
+
+<div *ngIf="loaded && notes.length == 0"><h5>There are no notes</h5></div>
+<div *ngIf="!loaded"><h5>Loading...</h5></div>

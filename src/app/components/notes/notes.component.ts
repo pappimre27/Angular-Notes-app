@@ -9,17 +9,26 @@ import { NoteService } from '../../services/note.service';
 })
 export class NotesComponent implements OnInit {
   protected notes: INote[];
+  protected selectedNote: INote;
+  protected loaded = false;
 
   public constructor(private noteService: NoteService) {}
 
   public ngOnInit() {
+    this.noteService.getStateClear().subscribe(clear => {
+      if (clear) {
+        this.selectedNote = { id: '', text: '', date: '' };
+      }
+    });
     this.noteService.getNotes().subscribe(notes => {
       this.notes = notes;
+      this.loaded = true;
     });
   }
 
   protected onSelect(note: INote): void {
     this.noteService.setFormNote(note);
+    this.selectedNote = note;
   }
 
   protected onDelete(note: INote): void {

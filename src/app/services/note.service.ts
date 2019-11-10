@@ -15,15 +15,18 @@ export class NoteService {
     text: null,
     date: null
   });
-
   private selectedNote = this.noteSource.asObservable();
 
+  private stateSource = new BehaviorSubject<boolean>(true);
+  private stateClear = this.stateSource.asObservable();
+
   public constructor() {
-    this.notes = [
-      new Note('1', 'lorem ipsum', new Date('2019/11/11 12:50:20')),
-      new Note('2', 'lorem ipsum2', new Date('2019/11/11 12:50:20')),
-      new Note('3', 'lorem ipsum3', new Date('2019/11/11 12:50:20'))
-    ];
+    // this.notes = [
+    //   new Note('1', 'lorem ipsum', new Date('2019/11/11 12:50:20')),
+    //   new Note('2', 'lorem ipsum2', new Date('2019/11/11 12:50:20')),
+    //   new Note('3', 'lorem ipsum3', new Date('2019/11/11 12:50:20'))
+    // ];
+    this.notes = [];
   }
 
   public getNotes(): Observable<INote[]> {
@@ -36,6 +39,10 @@ export class NoteService {
 
   public getSelectedNote(): Observable<INote> {
     return this.selectedNote;
+  }
+
+  public getStateClear(): Observable<boolean> {
+    return this.stateClear;
   }
 
   public addNote(note: INote): void {
@@ -57,5 +64,9 @@ export class NoteService {
         this.notes.splice(index, 1);
       }
     });
+  }
+
+  public clearState() {
+    this.stateSource.next(true);
   }
 }

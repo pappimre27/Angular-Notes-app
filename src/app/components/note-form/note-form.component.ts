@@ -39,13 +39,20 @@ export class NoteFormComponent implements OnInit {
     });
   }
 
+  protected clearState(): void {
+    this.isNew = true;
+    this.id = '';
+    this.text = '';
+    this.date = '';
+    this.noteService.clearState();
+  }
+
   protected onSubmit(): void {
-    console.log(this.generateId());
     // Check if new note
     if (this.isNew) {
       // new note
       this.id = this.generateId();
-      const note = new Note(this.id, this.text, this.date);
+      const note = new Note(this.id, this.text, new Date());
       // Add note
       this.noteService.addNote(note);
     } else {
@@ -53,5 +60,6 @@ export class NoteFormComponent implements OnInit {
       const updateNote = new Note(this.id, this.text, new Date());
       this.noteService.updateNote(updateNote);
     }
+    this.clearState();
   }
 }
