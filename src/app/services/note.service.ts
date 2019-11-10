@@ -21,15 +21,11 @@ export class NoteService {
   private stateClear = this.stateSource.asObservable();
 
   public constructor() {
-    // this.notes = [
-    //   new Note('1', 'lorem ipsum', new Date('2019/11/11 12:50:20')),
-    //   new Note('2', 'lorem ipsum2', new Date('2019/11/11 12:50:20')),
-    //   new Note('3', 'lorem ipsum3', new Date('2019/11/11 12:50:20'))
-    // ];
     this.notes = [];
   }
 
   public getNotes(): Observable<INote[]> {
+    this.getFromLocalStorage();
     return of(this.notes);
   }
 
@@ -47,6 +43,7 @@ export class NoteService {
 
   public addNote(note: INote): void {
     this.notes.unshift(note);
+    this.addToLocalStorage(this.notes);
   }
 
   public updateNote(updatedNote: INote): void {
@@ -68,5 +65,20 @@ export class NoteService {
 
   public clearState() {
     this.stateSource.next(true);
+  }
+
+  private addToLocalStorage(notes: INote[]): void {
+    localStorage.setItem('notes', JSON.stringify(notes));
+  }
+
+  private getFromLocalStorage(): void {
+    if (localStorage.getItem('notes') === null) {
+      this.notes = [];
+    } else {
+      const Notes = JSON.parse(localStorage.getItem('notes'));
+      Notes.forEach((note: { id: string; text: string; date: any }) =>
+        this.notes.push(new Note(note.id, note.text, note.date))
+      );
+    }
   }
 }
