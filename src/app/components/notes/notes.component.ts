@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Note } from '../../models/note';
+import { INote, Note } from '../../models/note';
 import { NoteService } from '../../services/note.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { NoteService } from '../../services/note.service';
   styleUrls: ['./notes.component.css']
 })
 export class NotesComponent implements OnInit {
-  public notes: Note[];
+  protected notes: INote[];
 
   public constructor(private noteService: NoteService) {}
 
@@ -18,7 +18,13 @@ export class NotesComponent implements OnInit {
     });
   }
 
-  public onSelect(note: Note): void {
+  protected onSelect(note: INote): void {
     this.noteService.setFormNote(note);
+  }
+
+  protected onDelete(note: INote): void {
+    if (confirm('Are you sure?')) {
+      this.noteService.deleteNote(note.id);
+    }
   }
 }
