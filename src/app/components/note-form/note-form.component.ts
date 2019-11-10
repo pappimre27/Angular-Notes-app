@@ -9,11 +9,11 @@ import { NoteService } from '../../services/note.service';
   styleUrls: ['./note-form.component.css']
 })
 export class NoteFormComponent implements OnInit {
-  public id: string;
-  public text: string;
-  public date: any;
+  protected id: string;
+  protected text: string;
+  protected date: any;
 
-  public isNew = true;
+  protected isNew = true;
 
   public constructor(private noteService: NoteService) {}
 
@@ -39,7 +39,7 @@ export class NoteFormComponent implements OnInit {
     });
   }
 
-  public clearState(): void {
+  protected clearState(): void {
     this.isNew = true;
     this.id = '';
     this.text = '';
@@ -47,7 +47,7 @@ export class NoteFormComponent implements OnInit {
     this.noteService.clearState();
   }
 
-  public onSubmit(): void {
+  protected onSubmit(): void {
     // Check if new note
     if (this.isNew) {
       // new note
