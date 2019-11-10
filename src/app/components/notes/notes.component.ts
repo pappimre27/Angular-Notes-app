@@ -8,9 +8,9 @@ import { NoteService } from '../../services/note.service';
   styleUrls: ['./notes.component.css']
 })
 export class NotesComponent implements OnInit {
-  protected notes: INote[];
-  protected selectedNote: INote;
-  protected loaded = false;
+  public notes: INote[];
+  public selectedNote: INote;
+  public loaded = false;
 
   public constructor(private noteService: NoteService) {}
 
@@ -26,12 +26,12 @@ export class NotesComponent implements OnInit {
     });
   }
 
-  protected onSelect(note: INote): void {
+  public onSelect(note: INote): void {
     this.noteService.setFormNote(note);
     this.selectedNote = note;
   }
 
-  protected onDelete(note: INote): void {
+  public onDelete(note: INote): void {
     if (confirm('Are you sure?')) {
       this.noteService.deleteNote(note.id);
     }
