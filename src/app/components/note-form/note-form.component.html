@@ -10,16 +10,13 @@
       >
       </textarea>
     </div>
-    <input
-      type="submit"
-      value="Add note"
-      class="btn btn-light"
-      [disabled]="!this.text"
-    />
+    <button type="submit" class="btn btn-primary mr-1" [disabled]="!this.text">
+      {{ isNew ? 'Add note' : 'Update note' }}
+    </button>
     <button
       (click)="clearState()"
       type="button"
-      class="btn btn-warning"
+      class="btn btn-secondary"
       [hidden]="!this.text"
     >
       Clear

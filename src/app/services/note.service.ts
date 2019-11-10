@@ -53,6 +53,7 @@ export class NoteService {
         this.notes.unshift(updatedNote);
       }
     });
+    this.addToLocalStorage(this.notes);
   }
 
   public deleteNote(id: string): void {
@@ -61,6 +62,7 @@ export class NoteService {
         this.notes.splice(index, 1);
       }
     });
+    this.addToLocalStorage(this.notes);
   }
 
   public clearState() {
